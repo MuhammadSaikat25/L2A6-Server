@@ -4,9 +4,6 @@ import { Users } from "./user.model";
 import bcrypt from "bcrypt";
 
 const postUserIntoDB = async (playLoad: TUser) => {
-  if (playLoad.password) {
-    return;
-  }
   const hashedPassword = await bcrypt.hash(playLoad.password!, 10);
   playLoad.password = hashedPassword;
   const userExist = await Users.findOne({ email: playLoad.email });
